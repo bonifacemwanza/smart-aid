@@ -132,11 +132,11 @@ smart-aid/
 
 | Ready State | Voice Calibration |
 |-------------|-------------------|
-| ![Ready](thesis/figures/ui_ready_state.png) | ![Calibration](thesis/figures/ui_calibration_complete.png) |
+| ![Ready](screenshots/ui_ready_state.png) | ![Calibration](screenshots/ui_calibration_complete.png) |
 
 | Query Response | Safety Scan |
 |----------------|-------------|
-| ![Query](thesis/figures/ui_query_response.png) | ![Scan](thesis/figures/ui_safety_scan.png) |
+| ![Query](screenshots/ui_query_response.png) | ![Scan](screenshots/ui_safety_scan.png) |
 
 ## Requirements
 
