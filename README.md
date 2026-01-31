@@ -171,12 +171,6 @@ sudo apt install python3-opencv python3-flask python3-picamera2
 python pi_scripts/stream_server.py
 ```
 
-## Thesis
-
-This project is part of a thesis on AI-powered assistive technology. Full documentation:
-- [THESIS.md](thesis/THESIS.md) - Complete thesis document
-- [RESULTS_SUMMARY.md](thesis/RESULTS_SUMMARY.md) - Experimental results
-
 ## Cost Comparison
 
 | System | Price |
