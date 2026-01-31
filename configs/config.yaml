@@ -1,0 +1,54 @@
+stream:
+  pi_url: "http://192.168.1.100:5000/video_feed"
+  timeout: 5.0
+  reconnect_attempts: 3
+  reconnect_delay: 1.0
+
+camera:
+  width: 640
+  height: 480
+  fps: 30
+  device: 0
+  flip_horizontal: false
+  flip_vertical: false
+
+detection:
+  model: "yolov8n.pt"
+  confidence: 0.5
+  iou_threshold: 0.45
+  classes:
+    - person
+    - bicycle
+    - car
+    - motorcycle
+    - bus
+    - truck
+    - chair
+    - couch
+    - bed
+    - dining table
+    - door
+  device: "cpu"
+
+depth:
+  model: "vits"
+  max_distance: 10.0
+  colormap: "inferno"
+
+fusion:
+  danger_zone: 1.5
+  warning_zone: 3.0
+  position_threshold: 0.33
+
+feedback:
+  enabled: true
+  min_interval: 1.5
+  voice_rate: 150
+  voice_volume: 1.0
+
+visualization:
+  show_fps: true
+  show_detections: true
+  show_depth: true
+  bbox_thickness: 2
+  font_scale: 0.6

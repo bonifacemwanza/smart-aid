@@ -1,0 +1,144 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Smart Aid | Navigation Assistant</title>
+    <link rel="stylesheet" href="/static/css/styles.css">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="logo">
+            <div class="logo-icon">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="12" cy="12" r="10"/>
+                    <path d="M12 6v6l4 2"/>
+                </svg>
+            </div>
+            <div class="logo-text">Smart<span>Aid</span></div>
+        </div>
+        <div class="voice-indicator" id="wake-status" onclick="openCalibration()" title="Voice activation status - Click to calibrate">
+            <span class="indicator-dot"></span>
+            <span id="wake-text">Say "Hey Manso"</span>
+        </div>
+    </header>
+
+    <!-- Calibration Modal -->
+    <div class="modal-overlay" id="calibration-modal">
+        <div class="modal">
+            <div id="calibration-step-1">
+                <div class="modal-title">Voice Calibration</div>
+                <div class="modal-subtitle">Train the system to recognize your voice</div>
+                <p>Say <strong>"Hey Manso"</strong> three times to help the system learn your voice pattern.</p>
+                <div id="saved-phrases-container" style="display:none;">
+                    <p style="font-size:12px; color:var(--text-muted);">Currently trained phrases:</p>
+                    <div class="saved-list" id="saved-phrases"></div>
+                </div>
+                <div class="modal-actions">
+                    <button class="modal-btn primary" onclick="startCalibration()">Start Calibration</button>
+                    <button class="modal-btn secondary" onclick="closeCalibration()">Cancel</button>
+                </div>
+                <div style="text-align:center; margin-top:16px;">
+                    <button class="modal-btn text" onclick="clearCalibration()">Reset to defaults</button>
+                </div>
+            </div>
+            <div id="calibration-step-2" style="display:none;">
+                <div class="modal-title">Recording</div>
+                <p class="instruction-text">Say <strong>"Hey Manso"</strong> now</p>
+                <div class="calibration-progress">
+                    <div class="calibration-dot" id="cal-dot-1"></div>
+                    <div class="calibration-dot" id="cal-dot-2"></div>
+                    <div class="calibration-dot" id="cal-dot-3"></div>
+                </div>
+                <p id="calibration-instruction" class="instruction-text">Recording 1 of 3</p>
+                <div class="heard-display" id="heard-text">Listening...</div>
+                <div class="modal-actions">
+                    <button class="modal-btn secondary" onclick="cancelCalibration()">Cancel</button>
+                </div>
+            </div>
+            <div id="calibration-step-3" style="display:none;">
+                <div class="modal-title">Calibration Complete</div>
+                <p>The system has learned these variations of your wake word:</p>
+                <div class="saved-list" id="calibration-results"></div>
+                <div class="modal-actions">
+                    <button class="modal-btn primary" onclick="finishCalibration()">Done</button>
+                    <button class="modal-btn secondary" onclick="startCalibration()">Redo</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="container">
+        <!-- Safety Panel -->
+        <div class="safety-panel" id="safety-box">
+            <div class="safety-header">
+                <span class="safety-label">Safety Status</span>
+            </div>
+            <div class="safety-text" id="safety-text">Initializing...</div>
+        </div>
+
+        <!-- Video Feed -->
+        <div class="video-panel">
+            <div class="video-header">
+                <span class="video-title">Camera Feed</span>
+                <span class="video-status">Live</span>
+            </div>
+            <img id="video-feed" src="/video_feed" alt="Camera feed">
+        </div>
+
+        <!-- Main Actions -->
+        <div class="actions-grid">
+            <button class="action-btn btn-scan" onclick="quickScan()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <circle cx="11" cy="11" r="8"/>
+                    <path d="M21 21l-4.35-4.35"/>
+                </svg>
+                SCAN
+            </button>
+            <button class="action-btn btn-voice" id="btn-voice" onclick="toggleVoice()">
+                <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+                    <path d="M12 1a3 3 0 0 0-3 3v8a3 3 0 0 0 6 0V4a3 3 0 0 0-3-3z"/>
+                    <path d="M19 10v2a7 7 0 0 1-14 0v-2"/>
+                    <line x1="12" y1="19" x2="12" y2="23"/>
+                    <line x1="8" y1="23" x2="16" y2="23"/>
+                </svg>
+                <span id="btn-voice-text">SPEAK</span>
+            </button>
+        </div>
+
+        <!-- Quick Commands -->
+        <div class="quick-actions">
+            <button class="quick-btn" onclick="askQuestion('Is it safe to walk forward?')">Safe ahead?</button>
+            <button class="quick-btn" onclick="askQuestion('Where is the door?')">Find door</button>
+            <button class="quick-btn" onclick="askQuestion('What obstacles are near me?')">Obstacles</button>
+            <button class="quick-btn" onclick="askQuestion('Describe what you see')">Describe scene</button>
+        </div>
+
+        <!-- Input Area -->
+        <div class="input-panel">
+            <input type="text" id="query-input" placeholder="Ask a question..."
+                   onkeypress="if(event.key==='Enter')askQuestion()">
+            <button onclick="askQuestion()">Ask</button>
+        </div>
+
+        <!-- Response Panel -->
+        <div class="response-panel">
+            <div class="response-header">
+                <span class="response-label">Response</span>
+            </div>
+            <div class="response-text" id="response-text">Ready. Press SCAN or say "Hey Manso" to begin.</div>
+        </div>
+
+        <!-- System Status -->
+        <div class="system-status" id="system-status">
+            <span class="status-dot"></span>
+            <span id="status-text">Checking system...</span>
+        </div>
+    </div>
+
+    <!-- JavaScript -->
+    <script src="/static/js/voice.js"></script>
+    <script src="/static/js/app.js"></script>
+</body>
+</html>

@@ -1,0 +1,10 @@
+# Smart Aid - Raspberry Pi Requirements
+# Install system packages first:
+#   sudo apt update
+#   sudo apt install python3-opencv python3-flask python3-picamera2
+
+# Flask for streaming
+flask>=2.3.0
+
+# Optional: If you need additional packages
+# Note: picamera2 and opencv should be installed via apt

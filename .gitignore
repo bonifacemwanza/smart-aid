@@ -1,0 +1,86 @@
+# Python
+__pycache__/
+*.py[cod]
+*$py.class
+*.so
+.Python
+build/
+develop-eggs/
+dist/
+downloads/
+eggs/
+.eggs/
+lib/
+lib64/
+parts/
+sdist/
+var/
+wheels/
+*.egg-info/
+.installed.cfg
+*.egg
+docs
+thesis
+.claude/
+# Virtual environments
+venv/
+env/
+ENV/
+
+# IDE
+.idea/
+.vscode/
+*.swp
+*.swo
+.DS_Store
+
+# Jupyter Notebook
+.ipynb_checkpoints/
+
+# Model weights (too large for git)
+*.pt
+*.pth
+*.onnx
+*.bin
+models/*.pt
+models/*.pth
+
+# Data files
+data/captures/*.jpg
+data/captures/*.png
+data/sample_images/
+*.mp4
+*.avi
+*.mov
+
+# Logs
+*.log
+logs/
+
+# Environment variables
+.env
+.env.local
+
+# Cache
+.cache/
+*.cache
+hub/
+
+# Huggingface cache
+~/.cache/huggingface/
+
+# Pytest
+.pytest_cache/
+
+# Coverage
+htmlcov/
+.coverage
+.coverage.*
+
+# mypy
+.mypy_cache/
+
+# Temporary files
+*.tmp
+*.temp
+tmp/

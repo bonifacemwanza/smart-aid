@@ -1,0 +1,38 @@
+# Smart Aid - MacBook Requirements
+# Python 3.10+
+
+# Core
+numpy>=1.24.0
+opencv-python>=4.8.0
+pydantic>=2.0.0
+pydantic-settings>=2.0.0
+PyYAML>=6.0
+
+# Detection
+ultralytics>=8.0.0
+torch>=2.0.0
+torchvision>=0.15.0
+
+# Depth Estimation & Florence-2 VLM
+transformers>=4.45.0,<4.50.0  # Florence-2 compatible range
+pillow>=10.0.0
+timm>=0.9.0
+einops>=0.7.0
+
+# Feedback
+pyttsx3>=2.90
+
+# Web UI
+flask>=3.0.0  # Legacy (nav_ui.py)
+fastapi>=0.104.0  # New webapp
+uvicorn[standard]>=0.24.0  # ASGI server for FastAPI
+
+# Voice Input (Whisper)
+openai-whisper>=20231117
+sounddevice>=0.4.6
+
+# Development
+jupyter>=1.0.0
+notebook>=7.0.0
+matplotlib>=3.7.0
+ruff>=0.1.0
