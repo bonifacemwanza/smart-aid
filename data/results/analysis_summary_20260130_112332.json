@@ -1,0 +1,29 @@
+{
+  "timestamp": "20260130_112332",
+  "num_images": 6,
+  "performance": {
+    "detection_ms": {
+      "mean": 325.8167848325684,
+      "std": 139.92853748177816
+    },
+    "depth_ms": {
+      "mean": 2408.961652667434,
+      "std": 2079.1868669054807
+    },
+    "total_ms": 2734.933909833065,
+    "fps": 0.3656395485114439
+  },
+  "detections": {
+    "total": 9,
+    "classes": {
+      "window": 5,
+      "chair": 4
+    }
+  },
+  "obstacles": {
+    "total": 9,
+    "danger_count": 4,
+    "warning_count": 0,
+    "avg_distance": 5.527186323371199
+  }
+}
